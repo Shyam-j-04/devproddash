@@ -8,11 +8,11 @@ interface AuthState{
 
 const useAuthStore = create <AuthState>((set) => ({
 
-  authenticated: false,
+  authenticated: !!localStorage.getItem('token'),
 
   login: () => set((state =>({authenticated: true}))),
-  logout: () => set((state =>({authenticated: false}))),
-  
+  logout: () => { localStorage.removeItem('token'); set((state =>({authenticated: false}))) },
+
 }))
 
 export default useAuthStore
